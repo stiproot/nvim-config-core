@@ -12,6 +12,14 @@ local servers = {
   omnisharp = {},
 }
 
+local lsp_signature = require "lsp_signature"
+lsp_signature.setup {
+	bind = true,
+	handler_opts = {
+		border = "rounded",
+	},
+}
+
 local function on_attach(client, bufnr)
   -- Enable completion triggered by <C-X><C-O>
   -- See `:help omnifunc` and `:help ins-completion` for more information.
