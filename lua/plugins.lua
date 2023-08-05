@@ -57,7 +57,8 @@ function M.setup()
 	    "neovim/nvim-lspconfig",
 	    opt = true,
 	    event = "bufreadpre",
-	    wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim" },
+	    -- wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim" },
+	    wants = { "lsp_signature.nvim", "nvim-lsp-installer", "coq_nvim" },
 	    config = function()
 	      require("config.lsp").setup()
 	    end,
@@ -92,7 +93,12 @@ function M.setup()
 	    },
 	    "rafamadriz/friendly-snippets",
 	  },
-	  disable = false,
+	  disable = true,
+	}
+
+	use {
+		"ms-jpq/coq_nvim",
+		disable = false,
 	}
 
    -- Bootstrap Neovim
