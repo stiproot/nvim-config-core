@@ -52,6 +52,18 @@ function M.setup()
 				end
 		}
 
+		-- use("nvim-tree/nvim-web-devicons")
+
+		-- Autocompletion
+		use {
+			"hrsh7th/nvim-cmp",
+			config = function()
+				require "config.nvim-cmp"
+			end
+		} -- completion plugin
+		use("hrsh7th/cmp-buffer") -- source for text in buffer
+		use("hrsh7th/cmp-path") -- source for file system paths
+
     -- Notification
     use {
       "rcarriga/nvim-notify",
