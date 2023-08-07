@@ -45,6 +45,13 @@ function M.setup()
 
 		use("szw/vim-maximizer") 
 
+		use{
+			"numToStr/Comment.nvim",
+			 config = function()
+					require "config.comment"
+				end
+		}
+
     -- Notification
     use {
       "rcarriga/nvim-notify",
