@@ -12,7 +12,7 @@ function M.setup()
     },
     display = {
       open_fn = function()
-	return require("packer.util").float { border = "rounded" }
+				return require("packer.util").float { border = "rounded" }
       end,
     },
   }
@@ -53,47 +53,19 @@ function M.setup()
     }
 
   	-- lsp
-	  use {
-	    "neovim/nvim-lspconfig",
-	    opt = true,
-	    event = "bufreadpre",
-	    -- wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim" },
-	    wants = { "lsp_signature.nvim", "nvim-lsp-installer", "coq_nvim" },
-	    config = function()
-	      require("config.lsp").setup()
-	    end,
-	    requires = {
-	      "williamboman/nvim-lsp-installer",
-	      "ray-x/lsp_signature.nvim"
-	    },
-	  }
-
 	use {
-	  "hrsh7th/nvim-cmp",
-	  event = "InsertEnter",
-	  opt = true,
-	  config = function()
-	    require("config.cmp").setup()
-	  end,
-	  wants = { "LuaSnip" },
-	  requires = {
-	    "hrsh7th/cmp-buffer",
-	    "hrsh7th/cmp-path",
-	    "hrsh7th/cmp-nvim-lua",
-	    "ray-x/cmp-treesitter",
-	    --"hrsh7th/cmp-cmdline",
-	    "saadparwaiz1/cmp_luasnip",
-	    "hrsh7th/cmp-nvim-lsp",
-	    {
-	      "L3MON4D3/LuaSnip",
-	      wants = "friendly-snippets",
-	      config = function()
-		require("config.luasnip").setup()
-	      end,
-	    },
-	    "rafamadriz/friendly-snippets",
-	  },
-	  disable = true,
+		"neovim/nvim-lspconfig",
+		opt = true,
+		event = "BufReadPre",
+		wants = { "nvim-lsp-installer", "lua-dev.nvim", "vim-illuminate" },
+		config = function()
+			require("config.lsp").setup()
+		end,
+		requires = {
+			"williamboman/nvim-lsp-installer",
+			"folke/lua-dev.nvim",
+			"RRethy/vim-illuminate",
+		},
 	}
 
 	use {
