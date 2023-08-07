@@ -41,3 +41,6 @@ keymap("n", "<Down>", ":resize -1<CR>", default_opts)
 keymap("n", "]<Space>", "o<Esc>", default_opts)
 keymap("n", "[<Space>", "O<Esc>", default_opts)
 
+------------------- PLUGINS ------------------
+
+keymap("n", "<Leader>sm", ":MaximizerToggle<CR>", default_opts)
