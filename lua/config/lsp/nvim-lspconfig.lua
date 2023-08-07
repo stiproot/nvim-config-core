@@ -92,6 +92,13 @@ lspconfig["emmet_ls"].setup({
 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 })
 
+-- configure omnisharp language server
+lspconfig["omnisharp"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "cs" },
+})
+
 -- configure lua server (with special settings)
 lspconfig["lua_ls"].setup({
 	capabilities = capabilities,

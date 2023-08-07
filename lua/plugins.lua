@@ -40,7 +40,6 @@ function M.setup()
 	local function plugins(use)
 		use({ "wbthomason/packer.nvim" })
 
-		-- Load only when require
 		use({ "nvim-lua/plenary.nvim", module = "plenary" })
 
 		use("szw/vim-maximizer")
@@ -52,7 +51,7 @@ function M.setup()
 			end,
 		})
 
-		-- use("nvim-tree/nvim-web-devicons")
+		use("nvim-tree/nvim-web-devicons")
 
 		-- Autocompletion
 		use({
@@ -64,7 +63,7 @@ function M.setup()
 		use("hrsh7th/cmp-buffer") -- source for text in buffer
 		use("hrsh7th/cmp-path") -- source for file system paths
 
-		-- managing & installing lsp servers, linters & formatters
+		-- Managing & installing lsp servers, linters & formatters
 		use({
 			"williamboman/mason.nvim",
 			config = function()
@@ -73,16 +72,21 @@ function M.setup()
 		}) -- in charge of managing lsp servers, linters & formatters
 		use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
 
-		-- configuring lsp servers
+		-- Configuring lsp servers
 		use({
 			"neovim/nvim-lspconfig",
 			config = function()
 				require("config.lsp.nvim-lspconfig")
 			end,
 		}) -- easily configure language servers
+
 		use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
+
 		use({
 			"glepnir/lspsaga.nvim",
+			config = function()
+				require("config.lsp.lspsaga")
+			end,
 			branch = "main",
 			requires = {
 				{ "nvim-tree/nvim-web-devicons" },
