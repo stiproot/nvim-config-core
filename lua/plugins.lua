@@ -47,7 +47,7 @@ function M.setup()
 		use({
 			"numToStr/Comment.nvim",
 			config = function()
-				require("config.comment")
+				require("config.comment").setup()
 			end,
 		})
 
@@ -57,26 +57,37 @@ function M.setup()
 		use({
 			"hrsh7th/nvim-cmp",
 			config = function()
-				require("config.nvim-cmp")
+				require("config.nvim-cmp").setup()
 			end,
+			requires = {
+				"hrsh7th/cmp-buffer", -- source for text in buffer
+				"hrsh7th/cmp-path", -- source for file system paths
+			},
 		}) -- completion plugin
-		use("hrsh7th/cmp-buffer") -- source for text in buffer
-		use("hrsh7th/cmp-path") -- source for file system paths
 
 		-- Managing & installing lsp servers, linters & formatters
 		use({
 			"williamboman/mason.nvim",
+			-- after = { "nvim-lspconfig" },
+			requires = {
+				{
+					"williamboman/mason-lspconfig.nvim", -- bridges gap b/w mason & lspconfig
+					config = function()
+						require("config.lsp.mason-lspconfig").setup()
+						require("config.lsp.mason-null-ls").setup()
+					end,
+				},
+			},
 			config = function()
-				require("config.lsp.mason")
+				require("config.lsp.mason").setup()
 			end,
 		}) -- in charge of managing lsp servers, linters & formatters
-		use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
 
 		-- Configuring lsp servers
 		use({
 			"neovim/nvim-lspconfig",
 			config = function()
-				require("config.lsp.nvim-lspconfig")
+				require("config.lsp.nvim-lspconfig").setup()
 			end,
 		}) -- easily configure language servers
 
@@ -100,7 +111,7 @@ function M.setup()
 		use({
 			"jose-elias-alvarez/null-ls.nvim",
 			config = function()
-				require("config.lsp.null-ls")
+				require("config.lsp.null-ls").setup()
 			end,
 		}) -- configure formatters & linters
 		use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
@@ -118,34 +129,13 @@ function M.setup()
 		})
 
 		-- Notification
-		use({
-			"rcarriga/nvim-notify",
-			event = "VimEnter",
-			config = function()
-				vim.notify = require("notify")
-			end,
-		})
-
-		-- lsp
-		-- use {
-		-- 	"neovim/nvim-lspconfig",
-		-- 	opt = true,
-		-- 	event = "BufReadPre",
-		-- 	wants = { "nvim-lsp-installer", "lua-dev.nvim", "vim-illuminate" },
+		-- use({
+		-- 	"rcarriga/nvim-notify",
+		-- 	event = "VimEnter",
 		-- 	config = function()
-		-- 		require("config.lsp").setup()
+		-- 		vim.notify = require("notify")
 		-- 	end,
-		-- 	requires = {
-		-- 		"williamboman/nvim-lsp-installer",
-		-- 		"folke/lua-dev.nvim",
-		-- 		"RRethy/vim-illuminate",
-		-- 	},
-		-- }
-
-		-- use {
-		-- 	"ms-jpq/coq_nvim",
-		-- 	disable = false,
-		-- }
+		-- })
 
 		-- Bootstrap Neovim
 		if packer_bootstrap then

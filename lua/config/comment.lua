@@ -1,8 +1,7 @@
--- import comment plugin safely
-local setup, comment = pcall(require, "Comment")
-if not setup then
-  return
+local m = {}
+
+function m.setup()
+	require("Comment").setup()
 end
 
--- enable comment
-comment.setup()
+return m
