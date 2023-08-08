@@ -49,12 +49,12 @@ function m.setup()
 	-- })
 
 	-- configure typescript server with plugin
-	typescript.setup({
-		server = {
-			capabilities = capabilities,
-			on_attach = m.on_attach,
-		},
-	})
+	-- typescript.setup({
+	-- 	server = {
+	-- 		capabilities = capabilities,
+	-- 		on_attach = m.on_attach,
+	-- 	},
+	-- })
 
 	-- configure css server
 	-- lspconfig["cssls"].setup({
