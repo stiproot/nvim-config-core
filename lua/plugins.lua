@@ -66,44 +66,57 @@ function M.setup()
 		}) -- completion plugin
 
 		-- Managing & installing lsp servers, linters & formatters
+
 		use({
 			"williamboman/mason.nvim",
-			-- after = { "nvim-lspconfig" },
-			requires = {
-				{
-					"williamboman/mason-lspconfig.nvim", -- bridges gap b/w mason & lspconfig
-					config = function()
-						require("config.lsp.mason-lspconfig").setup()
-						require("config.lsp.mason-null-ls").setup()
-					end,
-				},
-			},
 			config = function()
 				require("config.lsp.mason").setup()
 			end,
-		}) -- in charge of managing lsp servers, linters & formatters
+		})
+
+		-- bridges gap b/w mason & lspconfig
+		use({
+			"williamboman/mason-lspconfig.nvim",
+			after = "mason.nvim",
+			config = function()
+				require("config.lsp.mason-lspconfig").setup()
+			end,
+		})
+
+		-- bridges gap b/w mason & null-ls
+		use({
+			"jayp0521/mason-null-ls.nvim",
+			after = "mason.nvim",
+			config = function()
+				require("config.lsp.mason-null-ls").setup()
+			end,
+		})
 
 		-- Configuring lsp servers
+		-- easily configure language servers
 		use({
 			"neovim/nvim-lspconfig",
+			after = "mason-lspconfig.nvim",
 			config = function()
 				require("config.lsp.nvim-lspconfig").setup()
 			end,
-		}) -- easily configure language servers
+		})
 
-		use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
+		-- for autocompletion
+		use("hrsh7th/cmp-nvim-lsp")
 
-		use({
-			"glepnir/lspsaga.nvim",
-			config = function()
-				require("config.lsp.lspsaga")
-			end,
-			branch = "main",
-			requires = {
-				{ "nvim-tree/nvim-web-devicons" },
-				{ "nvim-treesitter/nvim-treesitter" },
-			},
-		}) -- enhanced lsp uis
+		-- use({
+		-- 	"glepnir/lspsaga.nvim",
+		-- 	config = function()
+		-- 		require("config.lsp.lspsaga").setup()
+		-- 	end,
+		-- 	branch = "main",
+		-- 	requires = {
+		-- 		{ "nvim-tree/nvim-web-devicons" },
+		-- 		{ "nvim-treesitter/nvim-treesitter" },
+		-- 	},
+		-- }) -- enhanced lsp uis
+
 		use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 		use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
@@ -114,13 +127,12 @@ function M.setup()
 				require("config.lsp.null-ls").setup()
 			end,
 		}) -- configure formatters & linters
-		use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
 		-- treesitter configuration
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			config = function()
-				require("config.treesitter")
+				require("config.treesitter").setup()
 			end,
 			run = function()
 				local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
